@@ -14,7 +14,6 @@ default['cspp']['sdr']['download_cache'] = "cspp_download_cache"
 #Configuration options for cspp_sdr_env.sh
 #This options are relative to CSPP_SDR_HOME
 #  There should be no reason to change these from the defaults
-# Ex:  default['cspp']['sdr']['home'] = "/opt/CSPP_SDR_HOME"
 default['cspp']['sdr']['CSPP_ANC_CACHE_DIR'] = "/anc/cache"
 default['cspp']['sdr']['CSPP_SDR_LUTS'] = "/luts"
 default['cspp']['sdr']['CSPP_SDR_ANC_HOME'] = "/anc/static"
