@@ -73,18 +73,23 @@ Vagrant.configure("2") do |config|
   config.vm.provision :chef_solo do |chef|
     chef.json = {
       cspp: {
-        sdr: {
-          download_cache: "/vagrant_data"
-        },
+        download_cache: "/vagrant_data",
         home: "/vagrant_data/opt/CSPP",
+        user: "vagrant"
+      },
+      dbvm: {
+        download_cache: "/vagrant_data",
+        home: "/vagrant_data/opt",
         user: "vagrant"
       }
     }
 
     chef.run_list = [
         "recipe[minitest-handler::default]",
+        "recipe[dbvm-cookbook::default]",
         "recipe[cspp-cookbook::default]",
-        "recipe[cspp-cookbook::sdr]"
+        "recipe[cspp-cookbook::sdr]",
+        "recipe[cspp-cookbook::edr]"
     ]
   end
 end

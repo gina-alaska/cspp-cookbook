@@ -39,6 +39,13 @@ describe "cspp-cookbook::sdr" do
 end
 
 describe "cspp-cookbook::edr" do
-
   include Helpers::Cspp_cookbook
+  
+  it 'extracts the edr source' do
+    file(::File.join(cspp_edr_home, "cspp_edr_env.sh")).must_exist.with(:owner, node['cspp']['user']).with(:mode, '755')
+  end
+  
+  it 'extracts the edr static files' do
+    directory(::File.join(cspp_edr_home, "anc", "static", "asc_templates")).must_exist.with(:owner, node['cspp']['user'])
+  end
 end

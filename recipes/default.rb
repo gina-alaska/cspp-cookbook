@@ -9,6 +9,11 @@
 
 user node['cspp']['user']
 
+if node['recipes'].include? "dbvm-cookbook::default"
+  node.set['cspp']['home'] = node['dbvm']['HOME'] + "/apps/CSPP"
+  node.set['cspp']['user'] = node['dbvm']['user']
+end
+
 directory node['cspp']['home'] do
   owner node['cspp']['user']
   group node['cspp']['user']
