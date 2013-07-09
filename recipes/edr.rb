@@ -25,6 +25,17 @@ execute "Extract CSPP VIIRS EDR Static Files" do
   not_if {::File.exists?(::File.join(edr_home, "/anc/static/asc_templates"))}
 end
 
+execute "Extract CSPP VIIRS EDR Cache Files" do
+  command [
+    "tar xvf",
+    "#{node['cspp']['download_cache']}/#{node['cspp']['edr']['cache_files']}",
+    "-C #{cspp_home}"
+  ].join " "
+  user node['cspp']['user']
+  group node['cspp']['user']
+  not_if {::File.exists?(::File.join(edr_home, "/anc/cache/NAAPS-ANC-Int"))}
+end
+
 template "#{edr_home}/cspp_edr_env.sh" do
   user node['cspp']['user']
   group node['cspp']['user']
