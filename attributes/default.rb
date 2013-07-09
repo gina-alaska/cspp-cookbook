@@ -21,7 +21,7 @@ default['cspp']['sdr']['CSPP_SDR_ANC_TILE_PATH'] = "/ADL/data/tiles/Terrain-Eco-
 
 #EDR Home is relative to CSPP Home
 #Location of the CSPP EDR installation packages
-default['cspp']['edr']['home'] = "EDR_1_0"
+default['cspp']['edr']['home'] = "EDR_1_1"
 default['cspp']['edr']['source'] = "CSPP_VIIRS_EDR_V1.1.tar.gz"
 default['cspp']['edr']['static_files'] = "CSPP_VIIRS_EDR_V1.1_STATIC.tar.gz"
 default['cspp']['edr']['cache_files'] = "CSPP_VIIRS_EDR_V1.1_CACHE.tar.gz"
