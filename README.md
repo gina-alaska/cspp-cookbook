@@ -1,4 +1,4 @@
-# cspp-cookbook cookbook
+# cspp cookbook
 
 # Requirements
 rt-stps

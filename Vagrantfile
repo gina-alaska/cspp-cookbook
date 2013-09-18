@@ -6,7 +6,7 @@ Vagrant.configure("2") do |config|
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
 
-  config.vm.hostname = "cspp-cookbook-berkshelf"
+  config.vm.hostname = "cspp-berkshelf"
 
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "opscode_centos-6.3_chef-11.2.0.box"
@@ -74,22 +74,16 @@ Vagrant.configure("2") do |config|
     chef.json = {
       cspp: {
         download_cache: "/vagrant_data",
-        home: "/vagrant_data/opt/CSPP",
-        user: "vagrant"
-      },
-      dbvm: {
-        download_cache: "/vagrant_data",
-        home: "/vagrant_data/opt",
+        home: "/vagrant_data/opt/cspp",
         user: "vagrant"
       }
     }
 
     chef.run_list = [
         "recipe[minitest-handler::default]",
-        "recipe[dbvm-cookbook::default]",
-        "recipe[cspp-cookbook::default]",
-        "recipe[cspp-cookbook::sdr]",
-        "recipe[cspp-cookbook::edr]"
+        "recipe[cspp::default]",
+        "recipe[cspp::sdr]",
+        "recipe[cspp::viirs_edr]"
     ]
   end
 end

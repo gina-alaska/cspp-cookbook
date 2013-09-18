@@ -1,8 +1,8 @@
 require File.expand_path('../support/helpers', __FILE__)
 
-describe 'cspp-cookbook::default' do
+describe 'cspp::default' do
 
-  include Helpers::Cspp_cookbook
+  include Helpers::Cspp
   describe "cspp" do
     it 'adds the cspp user' do
       user(node['cspp']['user']).must_exist
@@ -14,8 +14,8 @@ describe 'cspp-cookbook::default' do
   end
 end
 
-describe "cspp-cookbook::sdr" do
-  include Helpers::Cspp_cookbook
+describe "cspp::sdr" do
+  include Helpers::Cspp
   # Example spec tests can be found at http://git.io/Fahwsw
   it 'creates the CSPP directory' do
     directory(cspp_sdr_home).must_exist.with(:owner, node['cspp']['user']).with(:group, node['cspp']['user'])
@@ -38,8 +38,8 @@ describe "cspp-cookbook::sdr" do
   end
 end
 
-describe "cspp-cookbook::edr" do
-  include Helpers::Cspp_cookbook
+describe "cspp::viirs_edr" do
+  include Helpers::Cspp
   
   it 'extracts the edr source' do
     file(::File.join(cspp_edr_home, "cspp_edr_env.sh")).must_exist.with(:owner, node['cspp']['user']).with(:mode, '755')

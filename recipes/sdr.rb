@@ -1,4 +1,4 @@
-include_recipe "cspp-cookbook::default"
+include_recipe "cspp::default"
 
 cspp_home = "#{node['cspp']['home']}"
 sdr_home =  cspp_home + "/#{node['cspp']['sdr']['home']}"
