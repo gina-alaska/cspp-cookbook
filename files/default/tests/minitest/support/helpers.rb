@@ -14,7 +14,7 @@ module Helpers
     end
   
     def cspp_edr_home
-      ::File.join(cspp_home, node['cspp']['edr']['home'])
+      ::File.join(cspp_home, node['cspp']['viirs_edr']['home'])
     end
   end
   
