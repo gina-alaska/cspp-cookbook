@@ -3,6 +3,10 @@ include_recipe "cspp::default"
 cspp_home = "#{node['cspp']['home']}"
 sdr_home =  cspp_home + "/#{node['cspp']['sdr']['home']}"
 
+template "/etc/profile.d/cspp_sdr_env.sh" do
+  mode 0755
+end
+
 execute "Extract CSPP Source" do
   command [
     "tar xvf",
@@ -36,8 +40,3 @@ execute "Extract CSPP Static Files" do
   not_if {::File.exists?(::File.join(sdr_home, "anc", "static", "ADL", "data", "tiles", "Terrain-Eco-ANC-Tile"))}
 end
 
-template "#{sdr_home}/cspp_sdr_env.sh" do
-  mode 0755
-  owner node['cspp']['user']
-  group node['cspp']['group']
-end

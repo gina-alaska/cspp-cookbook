@@ -9,7 +9,7 @@ describe 'cspp::default' do
     end
     
     it 'configures the cspp environment' do
-      file("#{cspp_home}/cspp_env.sh").must_exist.with(:owner, node['cspp']['user']).with(:mode, "755")
+      file("/etc/profile.d/cspp_env.sh").must_exist.with(:mode, "755")
     end
   end
 end
@@ -46,6 +46,6 @@ describe "cspp::viirs_edr" do
   end
   
   it 'extracts the edr static files' do
-    directory(::File.join(cspp_edr_home, "anc", "static", "asc_templates")).must_exist.with(:owner, node['cspp']['user'])
+    directory(::File.join(cspp_edr_home, "anc", "static", "LSM", "dem30ARC_Global_LandWater_uncompressed.h5")).must_exist.with(:owner, node['cspp']['user'])
   end
 end

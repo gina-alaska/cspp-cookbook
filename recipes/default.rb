@@ -15,8 +15,6 @@ directory node['cspp']['home'] do
   recursive true
 end
 
-template "#{node['cspp']['home']}/cspp_env.sh" do
-  owner node['cspp']['user']
-  group node['cspp']['user']
+template "/etc/profile.d/cspp_env.sh" do
   mode 0755
 end

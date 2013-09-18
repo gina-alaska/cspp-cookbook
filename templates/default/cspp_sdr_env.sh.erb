@@ -4,8 +4,9 @@
 ########################################################################
 #  This file is managed by Chef for <%= node[:fqdn] %>
 #  Last updated at: <%= Time.now %>
-######################################################################## 
+########################################################################
 
+export CSPP_SDR_HOME=<%= ::File.join(node['cspp']['home'], node['cspp']['sdr']['home']) %>
 
 test -n "$CSPP_SDR_HOME" || echo "CSPP_SDR_HOME is not set. Please set this environment variable to the install location of CSPP software packages. (When installed, \$CSPP_SDR_HOME/ADL is a directory.)"
 
@@ -20,16 +21,16 @@ test -d "$CSPP_SDR_HOME/common/ADL" && export CSPP_REV="20120215"
 #
 
 # read-write directory into which new ancillary data can be downloaded
-export CSPP_SDR_ANC_CACHE_DIR=${CSPP_SDR_HOME}<%= node['cspp']['sdr']['CSPP_ANC_CACHE_DIR'] %>
+export CSPP_SDR_ANC_CACHE_DIR=${CSPP_SDR_HOME}/anc/cache
 
 # read-write directory for initial SDR luts and download SDR luts
-export CSPP_SDR_LUTS=${CSPP_SDR_ANC_CACHE_DIR}<%= node['cspp']['sdr']['CSPP_SDR_LUTS'] %>
+export CSPP_SDR_LUTS=${CSPP_SDR_ANC_CACHE_DIR}/luts
 
 # static ancillary data including default algorithm settings
-export CSPP_SDR_ANC_HOME=${CSPP_SDR_HOME}<%= node['cspp']['sdr']['CSPP_SDR_ANC_HOME'] %>
+export CSPP_SDR_ANC_HOME=${CSPP_SDR_HOME}/anc/static
 
 # default location of static ancillary tiles, which we use in-place rather than linking into workspace
-export CSPP_SDR_ANC_TILE_PATH=${CSPP_SDR_ANC_HOME}<%= node['cspp']['sdr']['CSPP_SDR_ANC_TILE_PATH'] %>
+export CSPP_SDR_ANC_TILE_PATH=${CSPP_SDR_ANC_HOME}/ADL/data/tiles/Terrain-Eco-ANC-Tile/withMetadata
 
 
 
