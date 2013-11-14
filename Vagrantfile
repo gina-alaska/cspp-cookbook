@@ -9,11 +9,11 @@ Vagrant.configure("2") do |config|
   config.vm.hostname = "cspp-berkshelf"
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "opscode_centos-6.3_chef-11.2.0.box"
+  config.vm.box = "opscode_centos-6.4_provisionerless"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
-  config.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/opscode_centos-6.3_chef-11.2.0.box"
+  config.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/opscode_centos-6.4_provisionerless.box"
 
   # Assign this VM to a host-only network IP, allowing you to access it
   # via the IP. Host-only networks can talk to the host machine as well as
@@ -52,11 +52,9 @@ Vagrant.configure("2") do |config|
   # View the documentation for the provider you're using for more
   # information on available options.
 
-  config.ssh.max_tries = 40
-  config.ssh.timeout   = 120
-
   # The path to the Berksfile to use with Vagrant Berkshelf
   # config.berkshelf.berksfile_path = "./Berksfile"
+  config.omnibus.chef_version = :latest
 
   # Enabling the Berkshelf plugin. To enable this globally, add this configuration
   # option to your ~/.vagrant.d/Vagrantfile file
@@ -71,6 +69,7 @@ Vagrant.configure("2") do |config|
   # config.berkshelf.except = []
 
   config.vm.provision :chef_solo do |chef|
+    chef.data_bags_path = "data_bags"
     chef.json = {
       cspp: {
         download_cache: "/vagrant_data",
@@ -80,10 +79,11 @@ Vagrant.configure("2") do |config|
     }
 
     chef.run_list = [
-        "recipe[minitest-handler::default]",
-        "recipe[cspp::default]",
-        "recipe[cspp::sdr]",
-        "recipe[cspp::viirs_edr]"
+      "recipe[minitest-handler::default]",
+      "recipe[cspp::default]",
+      "recipe[cspp::sdr]",
+      "recipe[cspp::viirs_edr]",
+      "recipe[cspp::cris_hyperspectral]"
     ]
   end
 end

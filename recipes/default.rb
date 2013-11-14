@@ -6,7 +6,7 @@
 # 
 # All rights reserved - Do Not Redistribute
 #
-include_recipe "user::data_bags"
+include_recipe "user::data_bag"
 
 
 directory node['cspp']['home'] do
