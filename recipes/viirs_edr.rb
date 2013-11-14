@@ -1,6 +1,6 @@
 include_recipe "cspp::default"
 
-cspp_home = "#{node['cspp']['home']}"
+cspp_home = node['cspp']['home']
 viirs_edr = node['cspp']['viirs_edr']
 edr_home =  cspp_home + "/#{viirs_edr['home']}"
 

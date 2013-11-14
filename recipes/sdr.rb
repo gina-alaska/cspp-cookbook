@@ -1,6 +1,6 @@
 include_recipe "cspp::default"
 
-cspp_home = "#{node['cspp']['home']}"
+cspp_home = node['cspp']['home']
 sdr_home =  cspp_home + "/#{node['cspp']['sdr']['home']}"
 
 template "/etc/profile.d/cspp_sdr_env.sh" do
