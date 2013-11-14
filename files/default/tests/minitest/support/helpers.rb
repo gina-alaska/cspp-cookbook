@@ -16,6 +16,10 @@ module Helpers
     def cspp_edr_home
       ::File.join(cspp_home, node['cspp']['viirs_edr']['home'])
     end
+
+    def cris_hyperspectral_home
+      ::File.join(cspp_home, node['cspp']['cris_hyperspectral']['home'])
+    end
   end
   
 end

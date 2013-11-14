@@ -6,8 +6,8 @@
 # 
 # All rights reserved - Do Not Redistribute
 #
+include_recipe "user::data_bags"
 
-user node['cspp']['user']
 
 directory node['cspp']['home'] do
   owner node['cspp']['user']

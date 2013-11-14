@@ -1,5 +1,5 @@
 default['cspp']['user'] = 'processing'
-default['cspp']['home'] = "/opt/CSPP"
+default['cspp']['home'] = "/opt/cspp"
 default['cspp']['download_cache'] = "cspp_download_cache"
 
 #Location of the CSPP installation packages
@@ -18,3 +18,6 @@ default['cspp']['viirs_edr']['home'] = "EDR_1_1"
 default['cspp']['viirs_edr']['source'] = "CSPP_VIIRS_EDR_V1.1.tar.gz"
 default['cspp']['viirs_edr']['static_files'] = "CSPP_VIIRS_EDR_V1.1_STATIC.tar.gz"
 default['cspp']['viirs_edr']['cache_files'] = "CSPP_VIIRS_EDR_V1.1_CACHE.tar.gz"
+
+
+default['users'] = [default['cspp']['user']]
