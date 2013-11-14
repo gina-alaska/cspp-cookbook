@@ -20,4 +20,10 @@ default['cspp']['viirs_edr']['static_files'] = "CSPP_VIIRS_EDR_V1.1_STATIC.tar.g
 default['cspp']['viirs_edr']['cache_files'] = "CSPP_VIIRS_EDR_V1.1_CACHE.tar.gz"
 
 
+#CRIS Hyperspectral package.
+# Home is relative to CSPP Home
+default['cspp']['cris_hyperspectral']['home'] = "CSPP_UW_HSRTV"
+default['cspp']['cris_hyperspectral']['source'] = "CSPP_UW_HSRTV_V1.2.tar.gz"
+default['cspp']['cris_hyperspectral']['coeff_files'] = "CSPP_UW_HSRTV_coeffs_v1.2.tar.gz"
+
 default['users'] = [default['cspp']['user']]
