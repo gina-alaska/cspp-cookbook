@@ -3,7 +3,9 @@ include_recipe "cspp::default"
 cspp_home = node['cspp']['home']
 sdr_home =  cspp_home + "/#{node['cspp']['sdr']['home']}"
 
-package "libgfortran"
+%w{ libgfortran lftp }.each do |pkg|
+  package pkg
+end
 
 template "/etc/profile.d/cspp_sdr_env.sh" do
   mode 0644

@@ -3,9 +3,11 @@ require File.expand_path('../support/helpers', __FILE__)
 describe "cspp::sdr" do
   include Helpers::Cspp
   # Example spec tests can be found at http://git.io/Fahwsw
-  it 'installs libgfortran' do
+  it 'installs package dependencies' do
     package('libgfotran').must_be_installed
+    package('lftp').must_be_installed
   end
+
 
   it 'creates the CSPP directory' do
     directory(cspp_sdr_home).must_exist.with(:owner, node['cspp']['user']).with(:group, node['cspp']['user'])
