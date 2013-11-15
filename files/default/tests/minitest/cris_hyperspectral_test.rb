@@ -13,7 +13,7 @@ describe 'cspp::cris_hyperspectral' do
   end
 
   it 'configures the cris hyperspectral environment' do
-  	file("/etc/profile.d/cris_hyperspectral_env.sh").must_exist.with(:mode, 0755)
+  	file("/etc/profile.d/cris_hyperspectral_env.sh").must_exist.with(:mode, 0644)
   end
 
 end

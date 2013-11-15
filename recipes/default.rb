@@ -16,5 +16,5 @@ directory node['cspp']['home'] do
 end
 
 template "/etc/profile.d/cspp_env.sh" do
-  mode 0755
+  mode 0644
 end

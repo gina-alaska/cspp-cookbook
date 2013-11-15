@@ -6,7 +6,7 @@ edr_home =  cspp_home + "/#{viirs_edr['home']}"
 
 
 template "/etc/profile.d/cspp_edr_env.sh" do
-  mode 0755
+  mode 0644
 end
 
 execute "Extract CSPP VIIRS EDR Source" do

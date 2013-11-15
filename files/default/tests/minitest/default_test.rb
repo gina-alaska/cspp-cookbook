@@ -9,7 +9,7 @@ describe 'cspp::default' do
     end
     
     it 'configures the cspp environment' do
-      file("/etc/profile.d/cspp_env.sh").must_exist.with(:mode, "755")
+      file("/etc/profile.d/cspp_env.sh").must_exist.with(:mode, "644")
     end
   end
 end

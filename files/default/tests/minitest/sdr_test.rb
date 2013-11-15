@@ -3,6 +3,10 @@ require File.expand_path('../support/helpers', __FILE__)
 describe "cspp::sdr" do
   include Helpers::Cspp
   # Example spec tests can be found at http://git.io/Fahwsw
+  it 'installs libgfortran' do
+    package('libgfotran').must_be_installed
+  end
+
   it 'creates the CSPP directory' do
     directory(cspp_sdr_home).must_exist.with(:owner, node['cspp']['user']).with(:group, node['cspp']['user'])
   end  
@@ -20,6 +24,6 @@ describe "cspp::sdr" do
   end
 
   it 'configures the sdr environment' do
-    file(::File.join(cspp_sdr_home, "cspp_sdr_env.sh")).must_exist.with(:owner, node['cspp']['user']).with(:mode, '755')
+    file(::File.join(cspp_sdr_home, "cspp_sdr_env.sh")).must_exist.with(:owner, node['cspp']['user']).with(:mode, '644')
   end
 end

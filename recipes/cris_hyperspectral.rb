@@ -4,7 +4,7 @@ cspp_home = node['cspp']['home']
 cris_hs_home =  cspp_home + "/#{node['cspp']['cris_hyperspectral']['home']}"
 
 template "/etc/profile.d/cris_hyperspectral_env.sh" do
-  mode 0755
+  mode 0644
 end
 
 execute "Extract CRIS Hyperspectral Source" do
