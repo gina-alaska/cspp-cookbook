@@ -4,7 +4,7 @@ describe "cspp::sdr" do
   include Helpers::Cspp
   # Example spec tests can be found at http://git.io/Fahwsw
   it 'installs package dependencies' do
-    package('libgfotran').must_be_installed
+    package('libgfortran').must_be_installed
     package('lftp').must_be_installed
   end
 
@@ -26,6 +26,13 @@ describe "cspp::sdr" do
   end
 
   it 'configures the sdr environment' do
-    file(::File.join(cspp_sdr_home, "cspp_sdr_env.sh")).must_exist.with(:owner, node['cspp']['user']).with(:mode, '644')
+    file(::File.join(cspp_sdr_home, "cspp_sdr_env.sh")).must_exist.with(:owner, node['cspp']['user']).with(:mode, '755')
   end
+
+  # It looks like cron asserts are unable to evaluate non-root crontabs
+  # Visual inspection on the created vm confirms the crontab is created as expected
+  # it 'creates cron jobs to update ancillary data and lookup tables' do
+  #   cron("update ancillary data").must_exist.with(:user, node['cspp']['user'])
+  #   cron("update lookup tables").must_exist.with(:user, node['cspp']['user'])
+  # end
 end

@@ -27,3 +27,8 @@ default['cspp']['cris_hyperspectral']['source'] = "CSPP_UW_HSRTV_V1.2.tar.gz"
 default['cspp']['cris_hyperspectral']['coeff_files'] = "CSPP_UW_HSRTV_coeffs_v1.2.tar.gz"
 
 default['users'] = [default['cspp']['user']]
+
+#Cron jobs that need to be run to manage cspp
+#  Set to false to disable
+default['cspp']['cron']['ancillary'] = true
+default['cspp']['cron']['luts'] = true

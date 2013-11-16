@@ -44,3 +44,21 @@ execute "Extract CSPP Static Files" do
   not_if {::File.exists?(::File.join(sdr_home, "anc", "static", "ADL", "data", "tiles", "Terrain-Eco-ANC-Tile"))}
 end
 
+
+cron "update ancillary data" do
+  minute "0"
+  hour "0"
+  day "*"
+  command "#{sdr_home}/bin/mirror_jpss_ancillary.bash"
+  user node['cspp']['user']
+  only_if { node['cspp']['cron']['luts'] == true }
+end
+
+cron "update lookup tables" do
+  minute "0"
+  hour "0"
+  day "*"
+  command "#{sdr_home}/bin/mirror_jpss_luts.bash"
+  user node['cspp']['user']
+  only_if { node['cspp']['cron']['luts'] == true }
+end
