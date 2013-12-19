@@ -8,7 +8,7 @@ default['cspp']['download_cache'] = "cspp_download_cache"
 default['cspp']['sdr']['home'] = "SDR_1_5"
 default['cspp']['sdr']['source'] = "CSPP_SDR_V1.5.tar.gz"
 default['cspp']['sdr']['cache'] = "CSPP_SDR_V1.5_CACHE.tar.gz"
-default['cspp']['sdr']['static'] = "CSPP_SDR_V1.5_STATIC.tgz"
+default['cspp']['sdr']['static'] = "CSPP_SDR_V1.5_STATIC.tar.gz"
 
 
 #EDR Home is relative to CSPP Home
