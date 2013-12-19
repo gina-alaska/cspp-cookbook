@@ -11,6 +11,13 @@ template "/etc/profile.d/cspp_sdr_env.sh" do
   mode 0644
 end
 
+%w{source cache static}.each do |cspp_file|
+  remote_file "#{node['cspp']['download_cache']}/#{node['cspp']['sdr'][cspp_file]}" do
+    source "#{node['cspp']['url']}/#{node['cspp']['sdr'][cspp_file]}"
+    not_if { ::File.exists?("#{node['cspp']['url']}/#{node['cspp']['sdr'][cspp_file]}")}
+  end
+end
+
 execute "Extract CSPP Source" do
   command [
     "tar xvf",
@@ -22,10 +29,10 @@ execute "Extract CSPP Source" do
   not_if {::File.exists?(::File.join(sdr_home, "viirs", "viirs_sdr.sh"))}
 end
 
-execute "Extract CSPP Cache Files" do
+execute "Extract CSPP Cache" do
   command [
     "tar xvf",
-    "#{node['cspp']['download_cache']}/#{node['cspp']['sdr']['cache_files']}",
+    "#{node['cspp']['download_cache']}/#{node['cspp']['sdr']['cache']}",
     "-C #{cspp_home}"
   ].join " "
   user node['cspp']['user']
@@ -33,10 +40,10 @@ execute "Extract CSPP Cache Files" do
   not_if {::File.exists?(::File.join(sdr_home, "anc","cache","luts"))}
 end
 
-execute "Extract CSPP Static Files" do
+execute "Extract CSPP Static" do
   command [
     "tar xvf",
-    "#{node['cspp']['download_cache']}/#{node['cspp']['sdr']['static_files']}",
+    "#{node['cspp']['download_cache']}/#{node['cspp']['sdr']['static']}",
     "-C #{sdr_home}/anc/static"
   ].join " "
   user node['cspp']['user']

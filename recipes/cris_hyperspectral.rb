@@ -7,6 +7,14 @@ template "/etc/profile.d/cris_hyperspectral_env.sh" do
   mode 0644
 end
 
+
+%w{source coeffs}.each do |cspp_file|
+  remote_file "#{node['cspp']['download_cache']}/#{node['cspp']['cris_hyperspectral'][cspp_file]}" do
+    source "#{node['cspp']['url']}/#{node['cspp']['cris_hyperspectral'][cspp_file]}"
+    not_if { ::File.exists?("#{node['cspp']['url']}/#{node['cspp']['cris_hyperspectral'][cspp_file]}")}
+  end
+end
+
 execute "Extract CRIS Hyperspectral Source" do
   command [
     "tar xvf",                               
@@ -21,7 +29,7 @@ end
 execute "Extract CRIS Hyperspectral Coeff Files" do
   command [
     "tar xvf",
-    "#{node['cspp']['download_cache']}/#{node['cspp']['cris_hyperspectral']['coeff_files']}",
+    "#{node['cspp']['download_cache']}/#{node['cspp']['cris_hyperspectral']['coeffs']}",
     "-C #{cris_hs_home}"
   ].join " "
   user node['cspp']['user']

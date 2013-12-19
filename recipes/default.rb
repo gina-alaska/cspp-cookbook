@@ -18,3 +18,7 @@ end
 template "/etc/profile.d/cspp_env.sh" do
   mode 0644
 end
+
+Array(node['cspp']['dependencies']).each do |pkg|
+	package pkg
+end
