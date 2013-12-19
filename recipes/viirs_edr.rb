@@ -12,7 +12,7 @@ end
 %w{source cache static}.each do |cspp_file|
   remote_file "#{node['cspp']['download_cache']}/#{node['cspp']['viirs_edr'][cspp_file]}" do
     source "#{node['cspp']['url']}/#{node['cspp']['viirs_edr'][cspp_file]}"
-    not_if { ::File.exists?("#{node['cspp']['url']}/#{node['cspp']['viirs_edr'][cspp_file]}")}
+    not_if { ::File.exists?("#{node['cspp']['download_cache']}/#{node['cspp']['viirs_edr'][cspp_file]}")}
   end
 end
 

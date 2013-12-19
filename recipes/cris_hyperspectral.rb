@@ -11,7 +11,7 @@ end
 %w{source coeffs}.each do |cspp_file|
   remote_file "#{node['cspp']['download_cache']}/#{node['cspp']['cris_hyperspectral'][cspp_file]}" do
     source "#{node['cspp']['url']}/#{node['cspp']['cris_hyperspectral'][cspp_file]}"
-    not_if { ::File.exists?("#{node['cspp']['url']}/#{node['cspp']['cris_hyperspectral'][cspp_file]}")}
+    not_if { ::File.exists?("#{node['cspp']['download_cache']}/#{node['cspp']['cris_hyperspectral'][cspp_file]}")}
   end
 end
 
