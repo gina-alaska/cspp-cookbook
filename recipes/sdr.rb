@@ -44,11 +44,11 @@ execute "Extract CSPP Static" do
   command [
     "tar xvf",
     "#{node['cspp']['download_cache']}/#{node['cspp']['sdr']['static']}",
-    "-C #{sdr_home}/anc/static"
+    "-C #{sdr_home}"
   ].join " "
   user node['cspp']['user']
   group node['cspp']['user']
-  not_if {::File.exists?(::File.join(sdr_home, "anc", "static", "ADL", "data", "tiles", "Terrain-Eco-ANC-Tile"))}
+  not_if {::File.exists?(::File.join(sdr_home, "anc/static/ADL/data/tiles/Terrain-Eco-ANC-Tile/noMetadata/Terrain-Eco-ANC-Tile_S0448"))}
 end
 
 
