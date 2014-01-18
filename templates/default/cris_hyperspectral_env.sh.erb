@@ -6,7 +6,7 @@
 #  Last updated at: <%= Time.now %>
 ########################################################################
 
-export HS_RET_DIR=<%= ::File.join(node['cspp']['home'], node['cspp']['cris_hyperspectral']['home']) %>
+export HS_RET_DIR=${CSPP_HOME}/<%=node['cspp']['cris_hyperspectral']['path']%>
 export LOCAL_ANC_DIR=${HS_RET_DIR}/ancillary
 export REMOTE_ANC_DIR=ftp://ftp.ssec.wisc.edu/pub/eosdb/ancillary
 export L2_COEFF_CLR=${HS_RET_DIR}/CSPP_UW_HSRTV_coeffs
