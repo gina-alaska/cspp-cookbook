@@ -10,23 +10,23 @@ describe "cspp::sdr" do
 
 
   it 'creates the CSPP directory' do
-    directory(cspp_sdr_home).must_exist.with(:owner, node['cspp']['user']).with(:group, node['cspp']['user'])
+    directory(cspp_sdr_path).must_exist.with(:owner, node['cspp']['user']).with(:group, node['cspp']['user'])
   end  
 
   it 'extracts the cspp source' do
-    file(::File.join(cspp_sdr_home, "viirs", "viirs_sdr.sh")).must_exist
+    file(::File.join(cspp_sdr_path, "viirs", "viirs_sdr.sh")).must_exist
   end
 
   it 'extracts the cspp cache files' do
-    directory(::File.join(cspp_sdr_home, "anc", "cache", "luts")).must_exist.with(:owner, node['cspp']['user']).with(:group, node['cspp']['user'])
+    directory(::File.join(cspp_sdr_path, "anc", "cache", "luts")).must_exist.with(:owner, node['cspp']['user']).with(:group, node['cspp']['user'])
   end
 
   it 'extracts the cspp static files' do
-    directory(::File.join(cspp_sdr_home, "anc", "static", "ADL", "data", "tiles", "Terrain-Eco-ANC-Tile")).must_exist.with(:owner, node['cspp']['user']).with(:group, node['cspp']['user'])
+    directory(::File.join(cspp_sdr_path, "anc", "static", "ADL", "data", "tiles", "Terrain-Eco-ANC-Tile")).must_exist.with(:owner, node['cspp']['user']).with(:group, node['cspp']['user'])
   end
 
   it 'configures the sdr environment' do
-    file(::File.join(cspp_sdr_home, "cspp_sdr_env.sh")).must_exist.with(:owner, node['cspp']['user']).with(:mode, '755')
+    file(::File.join(cspp_sdr_path, "cspp_sdr_env.sh")).must_exist.with(:owner, node['cspp']['user']).with(:mode, '755')
   end
 
   # It looks like cron asserts are unable to evaluate non-root crontabs

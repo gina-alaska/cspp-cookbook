@@ -1,7 +1,7 @@
 include_recipe "cspp::default"
 
-cspp_home = node['cspp']['home']
-cris_hs_home =  cspp_home + "/#{node['cspp']['cris_hyperspectral']['home']}"
+cspp_path = node['cspp']['path']
+cris_hs_path =  cspp_path + "/#{node['cspp']['cris_hyperspectral']['path']}"
 
 template "/etc/profile.d/cris_hyperspectral_env.sh" do
   mode 0644
@@ -19,20 +19,20 @@ execute "Extract CRIS Hyperspectral Source" do
   command [
     "tar xvf",                               
     "#{node['cspp']['download_cache']}/#{node['cspp']['cris_hyperspectral']['source']}",
-    "-C #{cspp_home}"
+    "-C #{cspp_path}"
   ].join " "
   user node['cspp']['user']
   group node['cspp']['user']
-  not_if {::File.exists?(::File.join(cris_hs_home, "scripts/run_HSRTV.scr"))}
+  not_if {::File.exists?(::File.join(cris_hs_path, "scripts/run_HSRTV.scr"))}
 end
 
 execute "Extract CRIS Hyperspectral Coeff Files" do
   command [
     "tar xvf",
     "#{node['cspp']['download_cache']}/#{node['cspp']['cris_hyperspectral']['coeffs']}",
-    "-C #{cris_hs_home}"
+    "-C #{cris_hs_path}"
   ].join " "
   user node['cspp']['user']
   group node['cspp']['user']
-  not_if {::File.exists?(::File.join(cris_hs_home, "CSPP_UW_HSRTV_coeffs/CrIS_coeffs"))}
+  not_if {::File.exists?(::File.join(cris_hs_path, "CSPP_UW_HSRTV_coeffs/CrIS_coeffs"))}
 end

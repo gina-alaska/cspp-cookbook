@@ -5,11 +5,11 @@ describe 'cspp::cris_hyperspectral' do
   include Helpers::Cspp
 
   it 'extracts the cris hyperspectral source' do
-    file(::File.join(cris_hyperspectral_home, "bin", "uw_hsrtv_CrIS.exe")).must_exist
+    file(::File.join(cris_hyperspectral_path, "bin", "uw_hsrtv_CrIS.exe")).must_exist
   end
 
   it 'extracts the cris coeff files' do
-  	directory(::File.join(cris_hyperspectral_home, "CSPP_UW_HSRTV_coeffs")).must_exist
+  	directory(::File.join(cris_hyperspectral_path, "CSPP_UW_HSRTV_coeffs")).must_exist
   end
 
   it 'configures the cris hyperspectral environment' do

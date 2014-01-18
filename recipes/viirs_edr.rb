@@ -1,8 +1,8 @@
 include_recipe "cspp::default"
 
-cspp_home = node['cspp']['home']
+cspp_path = node['cspp']['path']
 viirs_edr = node['cspp']['viirs_edr']
-edr_home =  cspp_home + "/#{viirs_edr['home']}"
+edr_path =  cspp_path + "/#{viirs_edr['path']}"
 
 
 template "/etc/profile.d/cspp_edr_env.sh" do
@@ -20,32 +20,32 @@ execute "Extract CSPP VIIRS EDR Source" do
   command [
     "tar xvf",
     "#{node['cspp']['download_cache']}/#{viirs_edr['source']}",
-    "-C #{cspp_home}"
+    "-C #{cspp_path}"
   ].join " "
   user node['cspp']['user']
   group node['cspp']['user']
-  not_if {::File.exists?(::File.join(edr_home, "viirs/viirs_edr.sh"))}
+  not_if {::File.exists?(::File.join(edr_path, "viirs/viirs_edr.sh"))}
 end
 
 execute "Extract CSPP VIIRS EDR Static Files" do
   command [
     "tar xvf",
     "#{node['cspp']['download_cache']}/#{viirs_edr['static']}",
-    "-C #{cspp_home}"
+    "-C #{cspp_path}"
   ].join " "
   user node['cspp']['user']
   group node['cspp']['user']
-  not_if {::File.exists?(::File.join(edr_home, "anc/static/LSM/dem30ARC_Global_LandWater_uncompressed.h5"))}
+  not_if {::File.exists?(::File.join(edr_path, "anc/static/LSM/dem30ARC_Global_LandWater_uncompressed.h5"))}
 end
 
 execute "Extract CSPP VIIRS EDR Cache Files" do
   command [
     "tar xvf",
     "#{node['cspp']['download_cache']}/#{viirs_edr['cache']}",
-    "-C #{cspp_home}"
+    "-C #{cspp_path}"
   ].join " "
   user node['cspp']['user']
   group node['cspp']['user']
-  not_if {::File.exists?(::File.join(edr_home, "anc/cache/NAAPS-ANC-Int"))}
+  not_if {::File.exists?(::File.join(edr_path, "anc/cache/NAAPS-ANC-Int"))}
 end
 

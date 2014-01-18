@@ -1,9 +1,9 @@
 include_recipe "cspp::default"
 
-cspp_home = node['cspp']['home']
-sdr_home =  cspp_home + "/#{node['cspp']['sdr']['home']}"
+cspp_path = node['cspp']['path']
+sdr_path =  cspp_path + "/#{node['cspp']['sdr']['path']}"
 
-%w{ libgfortran lftp }.each do |pkg|
+%w{ libgfortran lftp}.each do |pkg|
   package pkg
 end
 
@@ -20,35 +20,35 @@ end
 
 execute "Extract CSPP Source" do
   command [
-    "tar xvf",
+    "tar xf",
     "#{node['cspp']['download_cache']}/#{node['cspp']['sdr']['source']}",
-    "-C #{cspp_home}"
+    "-C #{cspp_path}"
   ].join " "
   user node['cspp']['user']
   group node['cspp']['user']
-  not_if {::File.exists?(::File.join(sdr_home, "viirs", "viirs_sdr.sh"))}
+  not_if {::File.exists?(::File.join(sdr_path, "viirs", "viirs_sdr.sh"))}
 end
 
 execute "Extract CSPP Cache" do
   command [
-    "tar xvf",
+    "tar xf",
     "#{node['cspp']['download_cache']}/#{node['cspp']['sdr']['cache']}",
-    "-C #{cspp_home}"
+    "-C #{cspp_path}"
   ].join " "
   user node['cspp']['user']
   group node['cspp']['user']
-  not_if {::File.exists?(::File.join(sdr_home, "anc","cache","luts"))}
+  not_if {::File.exists?(::File.join(sdr_path, "anc","cache","luts"))}
 end
 
 execute "Extract CSPP Static" do
   command [
-    "tar xvf",
+    "tar xf",
     "#{node['cspp']['download_cache']}/#{node['cspp']['sdr']['static']}",
-    "-C #{sdr_home}"
+    "-C #{cspp_path}"
   ].join " "
   user node['cspp']['user']
   group node['cspp']['user']
-  not_if {::File.exists?(::File.join(sdr_home, "anc/static/ADL/data/tiles/Terrain-Eco-ANC-Tile/noMetadata/Terrain-Eco-ANC-Tile_S0448"))}
+  not_if {::File.exists?(::File.join(sdr_path, "anc/static/ADL/data/tiles/Terrain-Eco-ANC-Tile/noMetadata/Terrain-Eco-ANC-Tile_S0448"))}
 end
 
 
@@ -56,7 +56,7 @@ cron "update ancillary data" do
   minute "0"
   hour "0"
   day "*"
-  command "#{sdr_home}/bin/mirror_jpss_ancillary.bash"
+  command "#{sdr_path}/bin/mirror_jpss_ancillary.bash"
   user node['cspp']['user']
   only_if { node['cspp']['cron']['luts'] == true }
 end
@@ -65,7 +65,7 @@ cron "update lookup tables" do
   minute "0"
   hour "0"
   day "*"
-  command "#{sdr_home}/bin/mirror_jpss_luts.bash"
+  command "#{sdr_path}/bin/mirror_jpss_luts.bash"
   user node['cspp']['user']
   only_if { node['cspp']['cron']['luts'] == true }
 end

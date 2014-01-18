@@ -5,20 +5,20 @@ module Helpers
     include MiniTest::Chef::Resources
   
   
-    def cspp_home
-      node['cspp']['home']
+    def cspp_path
+      node['cspp']['path']
     end
   
-    def cspp_sdr_home
-      ::File.join(cspp_home, node['cspp']['sdr']['home'])
+    def cspp_sdr_path
+      ::File.join(cspp_path, node['cspp']['sdr']['path'])
     end
   
-    def cspp_edr_home
-      ::File.join(cspp_home, node['cspp']['viirs_edr']['home'])
+    def cspp_edr_path
+      ::File.join(cspp_path, node['cspp']['viirs_edr']['path'])
     end
 
-    def cris_hyperspectral_home
-      ::File.join(cspp_home, node['cspp']['cris_hyperspectral']['home'])
+    def cris_hyperspectral_path
+      ::File.join(cspp_path, node['cspp']['cris_hyperspectral']['path'])
     end
   end
   
