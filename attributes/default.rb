@@ -35,7 +35,7 @@ default['cspp']['cron']['luts'] = true
 case node['platform_family']
 when "rhel" 
 	default['cspp']['dependencies'] = ['libgfortran', 'lftp']
-when "ubuntu"
+when "debian"
 	default['cspp']['dependencies'] = ['libgfortran3', 'lftp']
 else
 	default['cspp']['dependencies'] = []
