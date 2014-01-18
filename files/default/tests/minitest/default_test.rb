@@ -11,5 +11,11 @@ describe 'cspp::default' do
     it 'configures the cspp environment' do
       file("/etc/profile.d/cspp_env.sh").must_exist.with(:mode, "644")
     end
+
+    it 'installs dependencies' do
+			package_dependencies.each do |pkg|
+				package(pkg).must_be_installed
+			end
+    end
   end
 end

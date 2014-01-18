@@ -1,6 +1,6 @@
 default['cspp']['user'] = 'processing'
 default['cspp']['path'] = "/opt/cspp"
-default['cspp']['url'] = nil
+default['cspp']['url'] = "http://localhost"  #Needs to be a valid URL 
 default['cspp']['download_cache'] = "cspp_download_cache"
 
 #Location of the CSPP installation packages
@@ -32,4 +32,11 @@ default['users'] = [default['cspp']['user']]
 default['cspp']['cron']['ancillary'] = true
 default['cspp']['cron']['luts'] = true
 
-default['cspp']['dependencies'] = ['libgfortran', 'lftp']
+case node['platform_family']
+when "rhel" 
+	default['cspp']['dependencies'] = ['libgfortran', 'lftp']
+when "ubuntu"
+	default['cspp']['dependencies'] = ['libgfortran3', 'lftp']
+else
+	default['cspp']['dependencies'] = []
+end

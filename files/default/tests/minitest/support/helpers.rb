@@ -20,6 +20,10 @@ module Helpers
     def cris_hyperspectral_path
       ::File.join(cspp_path, node['cspp']['cris_hyperspectral']['path'])
     end
+
+    def package_dependencies
+      node['cspp']['dependencies']
+    end
   end
   
 end
