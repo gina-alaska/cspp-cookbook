@@ -6,10 +6,10 @@
 # 
 # All rights reserved - Do Not Redistribute
 #
-include_recipe "user::data_bag"
 
+user node['cspp']['user']
 
-directory node['cspp']['home'] do
+directory node['cspp']['path'] do
   owner node['cspp']['user']
   group node['cspp']['user']
   recursive true

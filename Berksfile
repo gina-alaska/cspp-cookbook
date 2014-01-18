@@ -3,6 +3,4 @@ group :integration do
   cookbook "minitest-handler"
 end
 
-cookbook 'user'
-
 metadata

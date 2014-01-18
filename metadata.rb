@@ -6,8 +6,6 @@ description      "Installs/Configures cspp"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          "1.5.0"
 
-%w{centos}.each do |os|
+%w{centos redhat}.each do |os|
   supports os
 end
-
-depends 'user'
