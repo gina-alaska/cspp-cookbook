@@ -7,6 +7,6 @@
 # All rights reserved - Do Not Redistribute
 #
 
-Array(node['cspp']['dependencies']).each do |pkg|
-	package pkg
-end
+include_recipe "snpp_sdr"
+include_recipe "viirs_edr"
+include_recipe "uw_hyperspectral"

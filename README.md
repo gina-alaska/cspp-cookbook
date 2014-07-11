@@ -1,7 +1,9 @@
 # cspp cookbook
 
 # Requirements
-rt-stps
+
+# Recommended
+RT-STPS (http://github.com/gina-alaska/rtstps-cookbook)
 
 # Usage
 CSPP processing scripts and static data files must be downloaded and placed in 'cache' directory before using this cookbook
@@ -10,7 +12,7 @@ CSPP processing scripts and static data files must be downloaded and placed in '
 
 # Recipes
 default.rb
-- Adds cspp user
+- Installs all components of CSPP
 # Author
 
 Author:: Scott Macfarlane (<scott@gina.alaska.edu>)
