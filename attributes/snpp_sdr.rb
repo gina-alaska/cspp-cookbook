@@ -27,3 +27,10 @@ default['cspp']['snpp-sdr']['cron'] = {
   'ancillary' => false,
   'luts' => false
 }
+
+default['cspp']['snpp-sdr']['dependencies'] = case node['platform_family']
+when 'rhel'
+  ['libgfortran', 'lftp']
+when 'debian'
+  ['libgfortran3', 'lftp']
+end
