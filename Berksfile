@@ -4,6 +4,6 @@ group :integration do
   cookbook "minitest-handler"
 end
 
-cookbook 'libarchive'
+cookbook 'tar'
 
 metadata

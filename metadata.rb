@@ -6,7 +6,7 @@ description      "Installs/Configures cspp"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          "1.5.5"
 
-depends 'libarchive'
+depends 'tar'
 
 %w{centos redhat ubuntu}.each do |os|
   supports os
