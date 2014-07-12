@@ -1,11 +1,10 @@
 include_recipe "cspp::_env"
 include_recipe "cspp::_user"
-include_recipe "libarchive::default"
 
-node['cspp']['snpp-sdr']['dependencies'].eachd do |pkg|
+node['cspp']['snpp-sdr']['dependencies'].each do |pkg|
   package pkg
 end
- 
+
 node['cspp']['snpp-sdr']['components'].each do |name, component|
   component_install(component)
 end
