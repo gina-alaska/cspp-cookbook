@@ -1,30 +1,15 @@
-def component_install component
+def cspp_component component
   return if component['action'] != :install
 
-  directory component['path']
-
-  # remote_file component_cache(component) do
-  #   source component['url']
-  #   checksum component['checksum'] if component['checksum']
-  #   action :create
-  #   notifies :extract, "libarchive_file[#{component_cache(component)}]"
-  # end
-  #
-  # libarchive_file component_cache(component) do
-  #   path component_cache(component)
-  #   extract_to component['path']
-  #   owner node['cspp']['user']
-  #   group node['cspp']['user']
-  #   extract_options [:no_overwrite]
-  #   action :nothing
-  # end
+  include_recipe "tar::default"
+  directory component_target_dir(component)
 
   tar_extract component['url'] do
-    target_dir component['path']
+    target_dir component_target_dir(component)
     checksum component['checksum'] if component['checksum']
     user node['cspp']['user']
     group node['cspp']['user']
-    creates ::File.join(component['path'], component['creates'])
+    creates ::File.join(component_target_dir(component), component['creates'])
   end
 
 end
@@ -39,6 +24,10 @@ def component_file(component)
   require 'pathname'
 
   Pathname.new(URI.parse(component['url']).path).basename.to_s
+end
+
+def component_target_dir(component)
+  component['path'] || node['cspp']['path']
 end
 
 def software_path software

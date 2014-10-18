@@ -7,5 +7,5 @@ template "#{software_path("uw-hyperspectral")}/run_HSRTV.bash" do
 end
 
 node['cspp']['uw-hyperspectral']['components'].each do |name, component|
-  component_install(component)
+  cspp_component(component)
 end

@@ -7,6 +7,6 @@
 # All rights reserved - Do Not Redistribute
 #
 
-include_recipe "snpp_sdr"
-include_recipe "viirs_edr"
-include_recipe "uw_hyperspectral"
+include_recipe "cspp::snpp_sdr"
+include_recipe "cspp::viirs_edr"
+include_recipe "cspp::uw_hyperspectral"

@@ -4,7 +4,6 @@ default['cspp']['uw-hyperspectral']['version'] = "CSPP_UW_HSRTV"
 default['cspp']['uw-hyperspectral']['components'] = {
   'app' => {
     'url' => 'http://example.com/CSPP_UW_HSRTV_V1.2.tar.gz',
-    'path' => '/opt/cspp',
     'checksum' => 'f82f38ba7bd15cecca5241d45bb81abd117c2574dc107a4afcd0dc36eb6a01d2',
     'creates' => 'CSPP_UW_HSRTV/scripts/run_HSRTV.scr',
     'action' => :install

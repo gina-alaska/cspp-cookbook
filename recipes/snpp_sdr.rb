@@ -6,7 +6,7 @@ node['cspp']['snpp-sdr']['dependencies'].each do |pkg|
 end
 
 node['cspp']['snpp-sdr']['components'].each do |name, component|
-  component_install(component)
+  cspp_component(component)
 end
 
 template "/etc/profile.d/cspp_sdr_env.sh" do

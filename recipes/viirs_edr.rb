@@ -9,5 +9,5 @@ template "/etc/profile.d/cspp_edr_env.sh" do
 end
 
 node['cspp']['viirs-edr']['components'].each do |name, component|
-  component_install(component)
+  cspp_component(component)
 end
