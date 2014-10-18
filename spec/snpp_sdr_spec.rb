@@ -29,7 +29,7 @@ describe "cspp::snpp_sdr" do
           expect(chef_run).to create_template("/etc/profile.d/cspp_sdr_env.sh").
             with( mode: 0644,
                   variables: {
-                    version: chef_run.node['cspp']['snpp-sdr']['version']
+                    version: 'SDR_2_0'
                   })
         end
 
@@ -45,13 +45,13 @@ describe "cspp::snpp_sdr" do
               with( minute: "0",
                     hour: "0",
                     day: "*",
-                    command: "/opt/cspp/SDR_1_5/common/mirror_jpss_ancillary.bash",
+                    command: "/opt/cspp/SDR_2_0/common/mirror_jpss_ancillary.bash",
                     user: "processing")
             expect(chef_run).to create_cron("update lookup tables").
               with( minute: "0",
                     hour: "0",
                     day: "*",
-                    command: "/opt/cspp/SDR_1_5/common/mirror_jpss_luts.bash",
+                    command: "/opt/cspp/SDR_2_0/common/mirror_jpss_luts.bash",
                     user: "processing")
           end
         end

@@ -1,5 +1,5 @@
 source "https://api.berkshelf.com"
 
-cookbook 'tar'
+cookbook 'tar', github: 'smacfarlane/tar-cookbook'
 
 metadata

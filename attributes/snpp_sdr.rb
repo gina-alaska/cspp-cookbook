@@ -1,23 +1,23 @@
-default['cspp']['snpp-sdr']['version'] = "SDR_1_5"
+default['cspp']['snpp-sdr']['version'] = "SDR_2_0"
 
 # Visit http://cimss.ssec.wisc.edu/cspp/download/ to register for download
 default['cspp']['snpp-sdr']['components'] = {
   'app' => {
-    'url' => 'http://example.com/CSPP_SDR_V1.5.tar.gz',
-    'checksum' => 'e27525ad1dd37fcf2ea2b7dd0c72bc1ea7440c7864b2f3e3213f49d841bdd246',
-    'creates' => 'SDR_1_5/viirs/viirs_sdr.sh',
+    'url' => 'http://example.com/CSPP_SDR_V2.0.tar.gz',
+    'checksum' => '5ee25d39137a9e1ce728893f6f0b50fe923f55fb02bf0b8cd7e0eb4845b6abae',
+    'creates' => 'SDR_2_0/viirs/viirs_sdr.sh',
     'action' => :install
   },
   'static-terrain' => {
-    'url' => 'http://example.com/CSPP_SDR_V1.5_STATIC.tar.gz',
-    'checksum' => 'bf3ec0123f351378334099044d98f2d892aa69043c4414dfcb360d222bba7551',
-    'creates' => 'SDR_1_5/anc/static/ADL/data/tiles/Terrain-Eco-ANC-Tile',
+    'url' => 'http://example.com/CSPP_SDR_V2.0_STATIC.tar.gz',
+    'checksum' => '4fba0a1e4de557662e4295cb8cbe3f7d1be178b444bd9073356d937dcb092d52',
+    'creates' => 'SDR_2_0/anc/static/ADL/data/tiles/Terrain-Eco-ANC-Tile',
     'action' => :install
   },
   'cache' => {
-    'url' => 'http://example.com/CSPP_SDR_V1.5_CACHE.tar.gz',
-    'checksum' => '9343a0b6f490e6718737589a4bef67eb392c95831d99718d58db7ee960df1473',
-    'creates' => 'SDR_1_5/anc/cache/luts',
+    'url' => 'http://example.com/CSPP_SDR_V2.0_CACHE.tar.gz',
+    'checksum' => '7fed213eda23dda7fb0ada9ab0add86c3e2b3a08bfa296b30f366ae8c0b18f40',
+    'creates' => 'SDR_2_0/anc/cache/luts',
     'action' => :install
   }
 }
