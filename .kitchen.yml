@@ -3,14 +3,27 @@ driver:
   name: vagrant
 
 provisioner:
-  name: chef_solo
+  name: chef_zero
 
 platforms:
-  - name: ubuntu-12.04
+  - name: ubuntu-14.04
   - name: centos-6.4
+  - name: centos-7.0
 
 suites:
   - name: default
     run_list:
       - recipe[cspp::default]
+    attributes:
+  - name: snpp-sdr
+    run_list:
+      - recipe[cspp::snpp_sdr]
+    attributes:
+  - name: viirs-edr
+    run_list:
+      - recipe[cspp::viirs_edr]
+    attributes:
+  - name: uw-hyperspectral
+    run_list:
+      - recipe[cspp::uw_hyperspectral]
     attributes:

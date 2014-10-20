@@ -2,7 +2,10 @@ def cspp_component component
   return if component['action'] != :install
 
   include_recipe "tar::default"
-  directory component_target_dir(component)
+  directory component_target_dir(component) do
+    owner node['cspp']['user']
+    group node['cspp']['user']
+  end
 
   tar_extract component['url'] do
     target_dir component_target_dir(component)
