@@ -1,16 +1,17 @@
-#!/bin/sh
-# Environment script for CSPP / ADL 3.1.
+#!/bin/bash
+# Wrapper script for CSPP UW_HYPERSPECTRAL
 
 ########################################################################
-#  This file is managed by Chef for <%= node[:fqdn] %>
-#  Last updated at: <%= Time.now %>
+#  This file is managed by Chef
+#  Do not modify this file directly
 ########################################################################
 
-export HS_RET_DIR=${CSPP_HOME}/<%=node['cspp']['cris_hyperspectral']['path']%>
+export HS_RET_DIR=${CSPP_HOME}/CSPP_UW_HSRTV
 export LOCAL_ANC_DIR=${HS_RET_DIR}/ancillary
 export REMOTE_ANC_DIR=ftp://ftp.ssec.wisc.edu/pub/eosdb/ancillary
 export L2_COEFF_CLR=${HS_RET_DIR}/CSPP_UW_HSRTV_coeffs
 export L2_COEFF_CLD=${HS_RET_DIR}/CSPP_UW_HSRTV_coeffs
 export L2_STATICANC=${HS_RET_DIR}/static_ancillary
 export SHELLB3_PY=${HS_RET_DIR}/ShellB3/bin/python
-export PATH=${HS_RET_DIR}/bin:${HS_RET_DIR}/scripts:${PATH}
+
+$HS_RET_DIR/scripts/run_HSRTV.scr "$@"

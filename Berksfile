@@ -1,6 +1,5 @@
-site :opscode
-group :integration do
-  cookbook "minitest-handler"
-end
+source "https://api.berkshelf.com"
+
+cookbook 'tar', github: 'smacfarlane/tar-cookbook'
 
 metadata
