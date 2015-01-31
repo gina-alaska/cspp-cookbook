@@ -1,5 +1,5 @@
 def cspp_component component
-  return if component['action'] != :install
+  return if component['action'].to_s != 'install'
 
   include_recipe "tar::default"
   directory component_target_dir(component) do
