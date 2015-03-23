@@ -6,4 +6,8 @@
 #  Do not modify this file directly
 ########################################################################
 
-export CSPP_SDR_HOME=$CSPP_HOME/<%=@version%>
+
+if [ -f /etc/profile.d/cspp_env.sh ]; then
+  source /etc/profile.d/cspp_env.sh
+  export CSPP_SDR_HOME=${CSPP_HOME}/<%=@version%>
+fi
