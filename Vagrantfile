@@ -74,16 +74,26 @@ Vagrant.configure("2") do |config|
       cspp: {
         download_cache: "/vagrant_data",
         path: "/vagrant_data/opt/cspp",
-        user: "vagrant"
+        user: "vagrant",
+        "imagery-edr" => {
+          "components" => {
+            "app" => {
+              "url" => "http://mirrors.gina.alaska.edu/SSEC/CSPP/CSPP_IMAGERY_EDR_V2.0.tar.gz"
+            },
+            "cache" => {
+              "url" => "http://mirrors.gina.alaska.edu/SSEC/CSPP/CSPP_IMAGERY_EDR_V2.0_CACHE.tar.gz"
+            }
+          }
+        }
       }
     }
 
     chef.run_list = [
-      "recipe[minitest-handler::default]",
-      "recipe[cspp::default]",
-      "recipe[cspp::sdr]",
-      "recipe[cspp::viirs_edr]",
-      "recipe[cspp::cris_hyperspectral]"
+      "recipe[cspp::imagery_edr]"
+#      "recipe[cspp::default]",
+#      "recipe[cspp::sdr]",
+#      "recipe[cspp::viirs_edr]",
+#      "recipe[cspp::cris_hyperspectral]"
     ]
   end
 end
