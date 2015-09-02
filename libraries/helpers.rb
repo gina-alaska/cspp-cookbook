@@ -12,7 +12,6 @@ def cspp_component component
     checksum component['checksum'] if component['checksum']
     user node['cspp']['user']
     group node['cspp']['user']
-    # creates ::File.join(component_target_dir(component), component['creates']) if component['creates']
     only_if { component['creates'] && !::File.exist?(::File.join(component_target_dir(component), component['creates'])) }
   end
 
