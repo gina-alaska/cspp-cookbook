@@ -1,6 +1,9 @@
 ---
 driver:
   name: vagrant
+  vagrantfiles:
+    - test/storage.rb
+  provision: true
 
 provisioner:
   name: chef_zero
