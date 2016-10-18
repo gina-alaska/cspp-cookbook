@@ -1,1 +1,0 @@
-user node['cspp']['user']

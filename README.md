@@ -1,18 +1,24 @@
 # cspp cookbook
 
-# Requirements
+This is a resource cookbook for installing cspp packages.
 
-# Recommended
-RT-STPS (http://github.com/gina-alaska/rtstps-cookbook)
+## Example usage
 
-# Usage
-CSPP processing scripts and static data files must be downloaded and placed in 'cache' directory before using this cookbook
+Install cspp_sdr, with CACHE and STATIC ancillary, and patches to 2.2.3
 
-# Attributes
+```
+cspp_package "SDR" do
+  source 'http://mirrors.example.org/CSPP'
+  version '2.2'
+  ancillary %w{CACHE STATIC}
+  patch '2.2.3'
+end
+```
 
-# Recipes
-default.rb
-- Installs all components of CSPP
-# Author
 
-Author:: Scott Macfarlane (<scott@gina.alaska.edu>)
+# WARNING
+This cookbook has been rewritten to be a resource cookbook in 3.0.0
+
+If you would like to use the old recipe method, use an older 2.X version.
+
+

@@ -1,6 +1,6 @@
 #
-# Cookbook Name:: cspp
-# Recipe:: default
+# Cookbook Name:: cspp-cookbook
+# Spec:: default
 #
 # The MIT License (MIT)
 #
@@ -23,3 +23,19 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
+
+
+require 'spec_helper'
+
+describe 'cspp-cookbook::default' do
+  context 'When all attributes are default, on an unspecified platform' do
+    let(:chef_run) do
+      runner = ChefSpec::ServerRunner.new
+      runner.converge(described_recipe)
+    end
+
+    it 'converges successfully' do
+      expect { chef_run }.to_not raise_error
+    end
+  end
+end
