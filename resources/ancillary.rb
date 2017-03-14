@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: cspp
-# Resource:: package
+# Resource:: ancillary
 #
 # The MIT License (MIT)
 #
@@ -24,13 +24,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-resource_name :cspp_package
+resource_name :cspp_ancillary_package
 
 property :software, String, required: true, name_property: true
 property :install_path, String, default: '/opt/cspp'
 property :source, String, required: true
 property :version, String, required: true
-property :patch, String
+property :ancillary, Array, required: true
 property :user, String
 property :group, String
 property :clean_cache, [TrueClass,FalseClass], default: true
@@ -38,26 +38,26 @@ property :clean_cache, [TrueClass,FalseClass], default: true
 default_action :install
 
 load_current_value do |desired|
-  current_value_does_not_exist! unless ::File.exist?(::File.join(desired.install_path, ".#{desired.software}.#{desired.version}.yml"))
+  current_value_does_not_exist! unless ::File.exist?(::File.join(desired.install_path, ".anc.#{desired.software}.#{desired.version}.yml"))
 
-  cr = YAML.load_file(::File.join(desired.install_path, ".#{desired.software}.#{desired.version}.yml"))
+  cr = YAML.load_file(::File.join(desired.install_path, ".anc.#{desired.software}.#{desired.version}.yml"))
 
   source cr[:source]
   version cr[:version]
-  patch cr[:patch]
+  ancillary cr[:ancillary]
   user cr[:user]
   group cr[:group]
 end
 
 action :install do
-  converge_if_changed :version do
+  converge_if_changed :version, :ancillary do
     directory install_path do
       recursive true
       user new_resource.user
       group new_resource.group
     end
 
-    [ "CSPP_#{software}_V#{version}.tar.gz" ].flatten.each do |filename|
+    ancillary.map{|a| "CSPP_#{software}_V#{version}_#{a}.tar.gz" }.each do |filename|
       remote_file "#{Chef::Config[:file_cache_path]}/#{filename}" do
         source "#{new_resource.source}/#{filename}"
       end
@@ -73,38 +73,13 @@ action :install do
     end
   end
 
-  converge_if_changed :patch do
-    filename = "CSPP_#{software}_V#{patch}_patch.tar.gz"
-    remote_file "#{Chef::Config[:file_cache_path]}/#{filename}" do
-      source "#{new_resource.source}/#{filename}"
-      only_if { new_resource.patch }
-    end
-
-    execute "patch-sdr" do
-      command "tar xzf #{Chef::Config[:file_cache_path]}/#{filename} -C #{install_path}"
-      only_if { new_resource.patch }
-    end
-
-    file "#{Chef::Config[:file_cache_path]}/#{filename}" do
-      action :delete
-      only_if { new_resource.clean_cache }
-      only_if { new_resource.patch }
-    end
-  end
-
-  converge_if_changed :user, :group do
-    execute "cspp-change-ownership" do
-      command "chown #{new_resource.user}:#{new_resource.group} #{new_resource.install_path} -R"
-    end
-  end
-
   converge_if_changed do
     properties = new_resource.class.state_properties.map { |p| p.name.to_sym }
     properties = properties.each_with_object({}) do |name, o|
       o[name] = new_resource.send(name) if new_resource.property_is_set?(name)
     end
 
-    file ::File.join(install_path, ".#{software}.#{version}.yml") do
+    file ::File.join(install_path, ".anc.#{software}.#{version}.yml") do
       content properties.to_yaml
     end
   end
