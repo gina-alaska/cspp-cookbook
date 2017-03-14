@@ -73,6 +73,12 @@ action :install do
     end
   end
 
+  converge_if_changed :user, :group do
+    execute "cspp-change-ownership" do
+      command "chown #{new_resource.user}:#{new_resource.group} #{new_resource.install_path} -R"
+    end
+  end
+
   converge_if_changed do
     properties = new_resource.class.state_properties.map { |p| p.name.to_sym }
     properties = properties.each_with_object({}) do |name, o|
