@@ -8,9 +8,10 @@ provisioner:
 
 platforms:
   - name: centos-6.8
+  - name: centos-7
 
 suites:
   - name: default
     run_list:
-      - recipe[cspp::default]
+      - recipe[cspp-test::default]
     attributes:
