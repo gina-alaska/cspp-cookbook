@@ -51,19 +51,19 @@ end
 
 action :install do
   converge_if_changed :version, :ancillary do
-    directory install_path do
+    directory new_resource.install_path do
       recursive true
       user new_resource.user
       group new_resource.group
     end
 
-    ancillary.map{|a| "CSPP_#{software}_V#{version}_#{a}.tar.gz" }.each do |filename|
+    ancillary.map{|a| "CSPP_#{new_resource.software}_V#{new_resource.version}_#{a}.tar.gz" }.each do |filename|
       remote_file "#{Chef::Config[:file_cache_path]}/#{filename}" do
         source "#{new_resource.source}/#{filename}"
       end
 
       execute "extract-#{filename}" do
-        command "tar xzf #{Chef::Config[:file_cache_path]}/#{filename} -C #{install_path}"
+        command "tar xzf #{Chef::Config[:file_cache_path]}/#{filename} -C #{new_resource.install_path}"
       end
 
       file "#{Chef::Config[:file_cache_path]}/#{filename}" do
@@ -85,7 +85,7 @@ action :install do
       o[name] = new_resource.send(name) if new_resource.property_is_set?(name)
     end
 
-    file ::File.join(install_path, ".anc.#{software}.#{version}.yml") do
+    file ::File.join(new_resource.install_path, ".anc.#{new_resource.software}.#{new_resource.version}.yml") do
       content properties.to_yaml
     end
   end
