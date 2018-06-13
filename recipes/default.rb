@@ -24,4 +24,26 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-# Intentionally left blank
+# This recipe should only be used for testing
+
+include_recipe 'chef-sugar'
+
+user 'processing'
+
+cspp_package 'SDR' do
+  source 'https://s3-us-west-2.amazonaws.com/gina-packages/SSEC/CSPP'
+  version "3.0"
+  patch "3.0.3"
+  user 'processing'
+  group 'processing'
+end
+
+cspp_ancillary_package 'SDR' do
+  source 'https://s3-us-west-2.amazonaws.com/gina-packages/SSEC/CSPP'
+  version "3.0"
+  ancillary ["CACHE", "STATIC"]
+  user 'processing'
+  group 'processing'
+  not_if { vagrant? }
+end
+

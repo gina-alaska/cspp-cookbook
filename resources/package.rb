@@ -51,19 +51,19 @@ end
 
 action :install do
   converge_if_changed :version do
-    directory install_path do
+    directory new_resource.install_path do
       recursive true
       user new_resource.user
       group new_resource.group
     end
 
-    [ "CSPP_#{software}_V#{version}.tar.gz" ].flatten.each do |filename|
+    [ "CSPP_#{new_resource.software}_V#{new_resource.version}.tar.gz" ].flatten.each do |filename|
       remote_file "#{Chef::Config[:file_cache_path]}/#{filename}" do
         source "#{new_resource.source}/#{filename}"
       end
 
       execute "extract-#{filename}" do
-        command "tar xzf #{Chef::Config[:file_cache_path]}/#{filename} -C #{install_path}"
+        command "tar xzf #{Chef::Config[:file_cache_path]}/#{filename} -C #{new_resource.install_path}"
       end
 
       file "#{Chef::Config[:file_cache_path]}/#{filename}" do
@@ -74,14 +74,14 @@ action :install do
   end
 
   converge_if_changed :patch do
-    filename = "CSPP_#{software}_V#{patch}_patch.tar.gz"
+    filename = "CSPP_#{new_resource.software}_V#{new_resource.patch}_patch.tar.gz"
     remote_file "#{Chef::Config[:file_cache_path]}/#{filename}" do
       source "#{new_resource.source}/#{filename}"
       only_if { new_resource.patch }
     end
 
     execute "patch-sdr" do
-      command "tar xzf #{Chef::Config[:file_cache_path]}/#{filename} -C #{install_path}"
+      command "tar xzf #{Chef::Config[:file_cache_path]}/#{filename} -C #{new_resource.install_path}"
       only_if { new_resource.patch }
     end
 
@@ -104,7 +104,7 @@ action :install do
       o[name] = new_resource.send(name) if new_resource.property_is_set?(name)
     end
 
-    file ::File.join(install_path, ".#{software}.#{version}.yml") do
+    file ::File.join(new_resource.install_path, ".#{new_resource.software}.#{new_resource.version}.yml") do
       content properties.to_yaml
     end
   end
