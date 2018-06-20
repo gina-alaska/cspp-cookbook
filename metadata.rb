@@ -4,7 +4,7 @@ maintainer_email "support+cookbooks@gina.alaska.edu"
 license          "MIT"
 description      "Installs/Configures cspp"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          "3.2.0"
+version          "3.2.1"
 
 %w{centos redhat ubuntu}.each do |os|
   supports os

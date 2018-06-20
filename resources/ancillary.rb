@@ -57,7 +57,7 @@ action :install do
       group new_resource.group
     end
 
-    ancillary.map{|a| "CSPP_#{new_resource.software}_V#{new_resource.version}_#{a}.tar.gz" }.each do |filename|
+    new_resource.ancillary.map{|a| "CSPP_#{new_resource.software}_V#{new_resource.version}_#{a}.tar.gz" }.each do |filename|
       remote_file "#{Chef::Config[:file_cache_path]}/#{filename}" do
         source "#{new_resource.source}/#{filename}"
       end
